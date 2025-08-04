@@ -25,18 +25,16 @@
         
         #game-container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             height: 100%;
             width: 100%;
-            position: relative;
         }
         
-        #main-game-area {
-            display: flex;
+        #game-area {
             flex: 1;
-            flex-direction: row;
-            width: 100%;
-            min-height: 0; /* Для корректного сжатия в Firefox */
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
         }
         
         #game-board-container {
@@ -67,67 +65,45 @@
         }
         
         #side-panel {
-            width: 120px;
+            width: 150px;
             background-color: rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
-            padding: 10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .side-panel-hidden {
-            transform: translateX(100%);
-        }
-        
-        #toggle-side-panel {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 60px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            z-index: 10;
-            cursor: pointer;
+            padding: 15px;
+            flex-shrink: 0;
         }
         
         #next-piece {
             width: 100%;
-            height: 120px;
+            height: 150px;
             background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             position: relative;
         }
         
         #score-panel {
             display: flex;
             flex-direction: column;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .score-box {
             background-color: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            font-size: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 16px;
             text-align: center;
+            font-weight: bold;
         }
         
         .piece {
             position: absolute;
             box-sizing: border-box;
             border: 1px solid rgba(0, 0, 0, 0.3);
-            border-radius: 3px;
+            border-radius: 4px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             transition: transform 0.1s;
         }
@@ -136,7 +112,7 @@
             position: absolute;
             box-sizing: border-box;
             border: 1px solid rgba(0, 0, 0, 0.3);
-            border-radius: 3px;
+            border-radius: 4px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             transition: transform 0.1s, opacity 0.3s;
         }
@@ -185,42 +161,86 @@
         #controls {
             display: flex;
             flex-direction: column;
-            padding: 10px;
+            padding: 15px;
             background-color: rgba(0, 0, 0, 0.2);
         }
         
         .control-row {
             display: flex;
             justify-content: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .control-btn {
-            background-color: #ff9900;
+            background: linear-gradient(145deg, #ff9900, #e68a00);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 24px;
-            width: 60px;
-            height: 60px;
-            margin: 0 5px;
+            border-radius: 15px;
+            font-size: 28px;
+            width: 100px;
+            height: 100px;
+            margin: 0 8px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.1s;
-            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 3px 0 rgba(255, 255, 255, 0.2);
             touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.2s;
         }
         
         .control-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+            transform: translateY(3px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+                       inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .control-btn:active::after {
+            opacity: 1;
         }
         
         .wide-btn {
-            width: 130px;
-            font-size: 18px;
+            width: 100%;
+            font-size: 20px;
+            height: auto;
+            padding: 12px 0;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #ff9900, #e68a00);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 3px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        #drop-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #ff3333, #cc0000);
+            position: relative;
+        }
+        
+        #drop-btn::before {
+            content: "↓";
+            position: absolute;
+            font-size: 32px;
+            color: white;
         }
         
         /* Модальное окно */
@@ -246,7 +266,7 @@
         .modal-content {
             background-color: #fff;
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 15px;
             text-align: center;
             max-width: 90%;
             width: 300px;
@@ -272,30 +292,54 @@
             margin-bottom: 20px;
         }
         
-        .modal-timer {
-            font-size: 16px;
-            color: #666;
-        }
-        
         .modal-btn {
             background-color: #ff9900;
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
+            border-radius: 10px;
+            padding: 12px 24px;
             font-size: 16px;
             margin: 5px;
             cursor: pointer;
         }
         
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             #side-panel {
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 150px;
-                z-index: 5;
+                width: 120px;
+                padding: 12px;
+            }
+            
+            #next-piece {
+                height: 120px;
+                margin-bottom: 15px;
+            }
+            
+            .score-box {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .wide-btn {
+                font-size: 16px;
+                padding: 10px 0;
+            }
+            
+            .control-btn {
+                width: 80px;
+                height: 80px;
+                font-size: 24px;
+            }
+            
+            #drop-btn {
+                width: 80px;
+                height: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #side-panel {
+                width: 110px;
+                padding: 10px;
             }
             
             #next-piece {
@@ -304,40 +348,43 @@
             
             .score-box {
                 font-size: 12px;
-                padding: 6px 8px;
+                padding: 8px;
+            }
+            
+            .wide-btn {
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
     <div id="game-container">
-        <div id="main-game-area">
+        <div id="game-area">
             <div id="game-board-container">
                 <div id="game-board"></div>
             </div>
             
-            <div id="toggle-side-panel">≡</div>
-            
-            <div id="side-panel" class="side-panel-hidden">
-                <div id="next-piece"></div>
-                <div id="score-panel">
-                    <div class="score-box">Рекорд: <span id="high-score">0</span></div>
-                    <div class="score-box">Очки: <span id="current-score">0</span></div>
+            <div id="controls">
+                <div class="control-row">
+                    <button class="control-btn" id="left-btn">←</button>
+                    <button class="control-btn" id="rotate-btn">↻</button>
+                    <button class="control-btn" id="right-btn">→</button>
+                     <button class="control-btn" id="drop-btn"></button>
                 </div>
-                <button id="pause-btn" class="control-btn wide-btn">Пауза</button>
-                <button id="close-btn" class="control-btn wide-btn" style="margin-top: 10px; background-color: #fff; color: #0066cc;">X</button>
+                <!-- <div class="control-row">
+                    <button class="control-btn" id="drop-btn"></button>
+                </div> -->
             </div>
         </div>
         
-        <div id="controls">
-            <div class="control-row">
-                <button class="control-btn" id="left-btn">←</button>
-                <button class="control-btn" id="rotate-btn">↻</button>
-                <button class="control-btn" id="right-btn">→</button>
+        <div id="side-panel">
+            <div id="next-piece"></div>
+            <div id="score-panel">
+                <div class="score-box">Рекорд: <span id="high-score">0</span></div>
+                <div class="score-box">Очки: <span id="current-score">0</span></div>
             </div>
-            <div class="control-row">
-                <button class="control-btn wide-btn" id="drop-btn">Быстрый сброс ↓</button>
-            </div>
+            <button id="pause-btn" class="control-btn wide-btn">Пауза</button>
+            <button id="close-btn" class="control-btn wide-btn" style="margin-top: 15px; background: linear-gradient(145deg, #ffffff, #e6e6e6); color: #0066cc;">X</button>
         </div>
     </div>
 
@@ -409,8 +456,6 @@
         const finalScoreElem = document.getElementById('final-score');
         const finalHighscoreElem = document.getElementById('final-highscore');
         const restartBtn = document.getElementById('restart-btn');
-        const toggleSidePanelBtn = document.getElementById('toggle-side-panel');
-        const sidePanel = document.getElementById('side-panel');
         
         // Инициализация игрового поля
         function initGameBoard() {
@@ -460,7 +505,6 @@
             dropBtn.addEventListener('touchstart', (e) => { e.preventDefault(); hardDrop(); });
             
             restartBtn.addEventListener('click', resetGame);
-            toggleSidePanelBtn.addEventListener('click', toggleSidePanel);
             
             // Сенсорные события для управления свайпами
             let touchStartX = 0;
@@ -505,11 +549,6 @@
             
             // Запуск игрового цикла
             requestAnimationFrame(gameLoop);
-        }
-        
-        // Переключение боковой панели
-        function toggleSidePanel() {
-            sidePanel.classList.toggle('side-panel-hidden');
         }
         
         // Движение влево
@@ -590,7 +629,7 @@
                         block.style.height = `${size}px`;
                         block.style.backgroundColor = nextPiece.color;
                         block.style.border = '1px solid rgba(0, 0, 0, 0.3)';
-                        block.style.borderRadius = '2px';
+                        block.style.borderRadius = '3px';
                         nextPieceElem.appendChild(block);
                     }
                 }
