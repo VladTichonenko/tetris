@@ -161,25 +161,27 @@
         #controls {
             display: flex;
             flex-direction: column;
-            padding: 15px;
+            padding: 10px;
             background-color: rgba(0, 0, 0, 0.2);
+            width: 100%;
         }
         
         .control-row {
             display: flex;
-            justify-content: center;
-            margin-bottom: 15px;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 30px;
         }
         
         .control-btn {
             background: linear-gradient(145deg, #ff9900, #e68a00);
             color: white;
             border: none;
-            border-radius: 15px;
-            font-size: 28px;
-            width: 100px;
-            height: 100px;
-            margin: 0 8px;
+            border-radius: 10px;
+            font-size: 24px;
+            height: 60px;
+            flex: 1;
+            margin: 0 5px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -191,6 +193,7 @@
             touch-action: manipulation;
             position: relative;
             overflow: hidden;
+            min-width: 0;
         }
         
         .control-btn::after {
@@ -229,9 +232,6 @@
         }
         
         #drop-btn {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
             background: linear-gradient(145deg, #ff3333, #cc0000);
             position: relative;
         }
@@ -325,14 +325,8 @@
             }
             
             .control-btn {
-                width: 80px;
-                height: 80px;
-                font-size: 24px;
-            }
-            
-            #drop-btn {
-                width: 80px;
-                height: 80px;
+                height: 50px;
+                font-size: 20px;
             }
         }
         
@@ -354,6 +348,19 @@
             .wide-btn {
                 font-size: 14px;
             }
+            
+            .control-btn {
+                height: 45px;
+                font-size: 18px;
+                margin: 0 3px;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .control-btn {
+                height: 40px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -369,11 +376,8 @@
                     <button class="control-btn" id="left-btn">←</button>
                     <button class="control-btn" id="rotate-btn">↻</button>
                     <button class="control-btn" id="right-btn">→</button>
-                     <button class="control-btn" id="drop-btn"></button>
-                </div>
-                <!-- <div class="control-row">
                     <button class="control-btn" id="drop-btn"></button>
-                </div> -->
+                </div>
             </div>
         </div>
         
